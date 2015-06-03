@@ -3,166 +3,164 @@ title: API Reference
 
 language_tabs:
   - shell
-  - ruby
-  - python
-
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
-
-includes:
-  - errors
 
 search: true
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+The user watch list API allows registered end consumers to save catalog assets to be watched at a later time. Watch list items are saved per associated consumer, each of which have just one watch list known as the <em>default</em> watch list.
 
-We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+There are two versions of this service, v1 and v2.  The version to use is specified in the URL as you can see on the examples that follow.
 
-This example API documentation page was created with [Slate](http://github.com/tripit/slate). Feel free to edit it and use it as a base for your own API's documentation.
+You can view examples of calls to the API in the area to the right.
 
 # Authentication
 
-> To authorize, use this code:
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+curl 'http://player.ooyala.com/watchlist/<api_version>/list?account_token=<acount_token>'
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
+> Make sure to replace `<account_token>` with the one provided by the Gigya authentication service and <code>api_version</code> with either v1 or v2.
 
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
+Our user authentication and identity management is integrated with Gigya.  Gigya is a third party vendor that handles identity management of our clients from all types of social networks such as facebook, linkedin, google plus, etc.
 
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+<aside class="warning">
+The watch list API expects the <code>account_token</code> URL parameter to be included in all API requests to the server.
 </aside>
 
-# Kittens
+# Watch Lists
 
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
+## Get The Default Watch List
 
 ```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Isis",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/3"
-  -H "Authorization: meowmeowmeow"
+curl 'http://player.ooyala.com/watchlist/<api_version>/list?account_token=<acount_token>'
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
 {
-  "id": 2,
-  "name": "Isis",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "_shards": {
+    "failed": 0,
+    "successful": 4,
+    "total": 4
+  },
+  "hits": {
+    "hits": [],
+    "max_score": 0.053994928,
+    "total": 3
+  },
+  "timed_out": false,
+  "took": 3
 }
 ```
 
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">If you're not using an administrator API key, note that some kittens will return 403 Forbidden if they are hidden for admins only.</aside>
+This endpoint retrieves the metadata asociated with the ids saven in the default watch list.
 
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`GET http://player.ooyala.com/watchlist/:api_version/list`
+
+### Query Parameters
+
+Parameter | Description | Type    | Required
+--------- | ----------- | ------- | --------
+account_token | Authentication token provided by Gigya | String | True
+api_version | The version of the api the query is directed to. Must be either v1 OR v2 | String | True
+
+<aside class="success">
+Remember — all request to the Watch List API must be authenticated!
+</aside>
+
+<aside class="notice">
+The internal <code>hits</code> field in the response has a complicated structure that is supressed in the examples.
+</aside>
+
+## Add an item
+
+```shell
+curl -XPOST -H 'Content-Type: application/json' 'http://player.ooyala.com/watchlist/<api_version>/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&account_token=<acount_token>' -d '{}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "item_id": "9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk",
+  "position": 1,
+  "created_at": "2015-06-03T11:59:31.91646667-05:00",
+  "updated_at": "2015-06-03T11:59:31.91646667-05:00"
+}
+```
+
+This endpoint adds a item to the default watch list.
+
+
+### HTTP Request
+
+`POST http://player.ooyala.com/watchlist/:api_version/list`
 
 ### URL Parameters
 
-Parameter | Description
---------- | -----------
-ID | The ID of the cat to retrieve
+Parameter | Description | Type    | Required
+--------- | ----------- | ------- | --------
+account_token | Authentication token provided by Gigya | String | True
+api_version | The version of the api the query is directed to. Must be either v1 OR v2 | String | True
+embed_code | The id of the item to be added to the default watch list | String | True
 
+## Delete and item
+
+```shell
+curl -XDELETE 'http://player.ooyala.com/watchlist/<api_version>/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&account_token=<acount_token>'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true
+}
+```
+
+This endpoint deletes a item from the default watch list.
+
+### HTTP Request
+
+`DELETE http://player.ooyala.com/watchlist/:api_version/list`
+
+### URL Parameters
+
+Parameter | Description | Type    | Required
+--------- | ----------- | ------- | --------
+account_token | Authentication token provided by Gigya | String | True
+api_version | The version of the api the query is directed to. Must be either v1 OR v2 | String | True
+embed_code | The id of the item to be added to the default watch list | String | True
+
+## Check for an item existance in the default watch list
+
+```shell
+curl 'http://player.ooyala.com/watchlist/<api_version>/list/has?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&account_token=<acount_token>'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "response": false
+}
+```
+
+This endpoint checks for the existance a item in the default watch list.
+
+### HTTP Request
+
+`GET http://player.ooyala.com/watchlist/:api_version/list/has`
+
+### URL Parameters
+
+Parameter | Description | Type    | Required
+--------- | ----------- | ------- | --------
+account_token | Authentication token provided by Gigya | String | True
+api_version | The version of the api the query is directed to. Must be either v1 OR v2 | String | True
+embed_code | The id of the item to be added to the default watch list | String | True
