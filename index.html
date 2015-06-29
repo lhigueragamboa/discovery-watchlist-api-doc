@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>Watchlist API Reference</title>
 
     <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
@@ -42,29 +42,29 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>The user watch list API allows registered end consumers to save catalog assets to be watched at a later time. Watch list items are saved per associated consumer, each of which have just one watch list known as the <em>default</em> watch list.</p>
+<p>The Watchlist API allows registered end consumers to save catalog assets to be watched at a later time. Watchlist items are saved per associated consumer, each of which have just one watch list known as the <em>default</em> watch list.</p>
 
-<p>There are two versions of this service, v1 and v2.  The version to use is specified in the URL as you can see on the examples that follow.</p>
+<p>There are two versions of this service, v1 and v2.  The version to use is specified in the URL as shown in the examples that follow.</p>
 
 <p>You can view examples of calls to the API in the area to the right.</p>
 
 <h1 id="authentication">Authentication</h1>
-<pre class="highlight shell"><code>curl <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?account_token=&lt;acount_token&gt;'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?account_token=&lt;account_token&gt;'</span>
 </code></pre>
 
 <blockquote>
-<p>Make sure to replace <code class="prettyprint">&lt;account_token&gt;</code> with the one provided by the Gigya authentication service and <code>api_version</code> with either v1 or v2.</p>
+<p>Be sure to replace <code>account_token</code> with the one provided by the Gigya authentication service, and replace api_version</code> with either v1 or v2.</p>
 </blockquote>
 
-<p>Our user authentication and identity management is integrated with Gigya.  Gigya is a third party vendor that handles identity management of our clients from all types of social networks such as facebook, linkedin, google plus, etc.</p>
+<p>To start using the Watchlist service, obtain the API key or authentication token from your Ooyala representative.</p>
 
 <aside class="warning">
-The watch list API expects the <code>account_token</code> URL parameter to be included in all API requests to the server.
+The Watchlist API requires that the <code>account_token</code> URL parameter be included in all requests.
 </aside>
 
-<h1 id="watch-lists">Watch Lists</h1>
+<h1 id="watchlists">Watchlists</h1>
 
-<h2 id="get-the-default-watch-list">Get The Default Watch List</h2>
+<h2 id="get-the-default-watchlist">Get The Default Watchlist</h2>
 <pre class="highlight shell"><code>curl <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?account_token=&lt;acount_token&gt;'</span>
 </code></pre>
 
@@ -87,7 +87,7 @@ The watch list API expects the <code>account_token</code> URL parameter to be in
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint retrieves the metadata asociated with the ids saven in the default watch list.</p>
+<p>This endpoint retrieves the metadata asociated with the IDs saved in the default watchlist.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -107,25 +107,25 @@ The watch list API expects the <code>account_token</code> URL parameter to be in
 <td>account_token</td>
 <td>Authentication token provided by Gigya</td>
 <td>String</td>
-<td>True</td>
+<td>Yes</td>
 </tr>
 <tr>
 <td>api_version</td>
 <td>The version of the api the query is directed to. Must be either v1 OR v2</td>
 <td>String</td>
-<td>True</td>
+<td>Yes</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — all request to the Watch List API must be authenticated!
+All requests to the Watchlist API must be authenticated.
 </aside>
 
 <aside class="notice">
-The internal <code>hits</code> field in the response has a complicated structure that is supressed in the examples.
+The internal <code>hits</code> field in the response has a complicated structure that is excluded from the examples.
 </aside>
 
-<h2 id="add-an-item">Add an item</h2>
+<h2 id="add-an-item">Add an Item</h2>
 <pre class="highlight shell"><code>curl -XPOST -H <span class="s1">'Content-Type: application/json'</span> <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;acount_token&gt;'</span> -d <span class="s1">'{}'</span>
 </code></pre>
 
@@ -140,7 +140,7 @@ The internal <code>hits</code> field in the response has a complicated structure
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint adds a item to the default watch list.</p>
+<p>This endpoint adds an item to the default watchlist.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -160,23 +160,23 @@ The internal <code>hits</code> field in the response has a complicated structure
 <td>account_token</td>
 <td>Authentication token provided by Gigya</td>
 <td>String</td>
-<td>True</td>
+<td>Yes</td>
 </tr>
 <tr>
 <td>api_version</td>
 <td>The version of the api the query is directed to. Must be either v1 OR v2</td>
 <td>String</td>
-<td>True</td>
+<td>Yes</td>
 </tr>
 <tr>
 <td>embed_code</td>
 <td>The id of the item to be added to the default watch list</td>
 <td>String</td>
-<td>True</td>
+<td>Yes</td>
 </tr>
 </tbody></table>
 
-<h2 id="delete-and-item">Delete and item</h2>
+<h2 id="delete-an-item">Delete an Item</h2>
 <pre class="highlight shell"><code>curl -XDELETE <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;acount_token&gt;'</span>
 </code></pre>
 
@@ -188,7 +188,7 @@ The internal <code>hits</code> field in the response has a complicated structure
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint deletes a item from the default watch list.</p>
+<p>This endpoint deletes an item from the default watchlist.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
@@ -208,23 +208,23 @@ The internal <code>hits</code> field in the response has a complicated structure
 <td>account_token</td>
 <td>Authentication token provided by Gigya</td>
 <td>String</td>
-<td>True</td>
+<td>Yes</td>
 </tr>
 <tr>
 <td>api_version</td>
 <td>The version of the api the query is directed to. Must be either v1 OR v2</td>
 <td>String</td>
-<td>True</td>
+<td>Yes</td>
 </tr>
 <tr>
 <td>embed_code</td>
 <td>The id of the item to be added to the default watch list</td>
 <td>String</td>
-<td>True</td>
+<td>Yes</td>
 </tr>
 </tbody></table>
 
-<h2 id="check-for-an-item-existance-in-the-default-watch-list">Check for an item existance in the default watch list</h2>
+<h2 id="check-whether-an-item-exists-in-the-default-watchlist">Check Whether an Item Exists in the Default Watchlist</h2>
 <pre class="highlight shell"><code>curl <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list/has?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;acount_token&gt;'</span>
 </code></pre>
 
@@ -236,11 +236,59 @@ The internal <code>hits</code> field in the response has a complicated structure
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>This endpoint checks for the existance a item in the default watch list.</p>
+<p>This endpoint checks if an item exists in the default watchlist.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
 <p><code class="prettyprint">GET http://player.ooyala.com/watchlist/:api_version/list/has</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Type</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>account_token</td>
+<td>Authentication token provided by Gigya</td>
+<td>String</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>api_version</td>
+<td>The version of the api the query is directed to. Must be either v1 OR v2</td>
+<td>String</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td>embed_code</td>
+<td>The id of the item to be added to the default watch list</td>
+<td>String</td>
+<td>Yes</td>
+</tr>
+</tbody></table>
+
+<h2 id="clear-the-default-watchlist">Clear the default Watchlist</h2>
+<pre class="highlight shell"><code>curl -XDELETE <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list/all?account_token=&lt;acount_token&gt;'</span>
+</code></pre>
+
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"sucess"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint deletes all the items in the default watchlist.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE http://player.ooyala.com/watchlist/:api_version/list/all</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -261,12 +309,6 @@ The internal <code>hits</code> field in the response has a complicated structure
 <tr>
 <td>api_version</td>
 <td>The version of the api the query is directed to. Must be either v1 OR v2</td>
-<td>String</td>
-<td>True</td>
-</tr>
-<tr>
-<td>embed_code</td>
-<td>The id of the item to be added to the default watch list</td>
 <td>String</td>
 <td>True</td>
 </tr>
