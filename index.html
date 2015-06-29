@@ -65,7 +65,7 @@ The Watchlist API requires that the <code>account_token</code> URL parameter be 
 <h1 id="watchlists">Watchlists</h1>
 
 <h2 id="get-the-default-watchlist">Get The Default Watchlist</h2>
-<pre class="highlight shell"><code>curl <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?account_token=&lt;acount_token&gt;'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?account_token=&lt;account_token&gt;'</span>
 </code></pre>
 
 <blockquote>
@@ -125,8 +125,34 @@ All requests to the Watchlist API must be authenticated.
 The internal <code>hits</code> field in the response has a complicated structure that is excluded from the examples.
 </aside>
 
+<h3 id="error-codes">Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Status Code</th>
+<th>Error</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>Empty URL parameter &lt;name&gt;</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>Parameters map is nil</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>Timed out retrieving metadata for watchlist items</td>
+</tr>
+</tbody></table>
+
 <h2 id="add-an-item">Add an Item</h2>
-<pre class="highlight shell"><code>curl -XPOST -H <span class="s1">'Content-Type: application/json'</span> <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;acount_token&gt;'</span> -d <span class="s1">'{}'</span>
+<pre class="highlight shell"><code>curl -XPOST -H <span class="s1">'Content-Type: application/json'</span> <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;account_token&gt;'</span> -d <span class="s1">'{}'</span>
 </code></pre>
 
 <blockquote>
@@ -177,7 +203,7 @@ The internal <code>hits</code> field in the response has a complicated structure
 </tbody></table>
 
 <h2 id="delete-an-item">Delete an Item</h2>
-<pre class="highlight shell"><code>curl -XDELETE <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;acount_token&gt;'</span>
+<pre class="highlight shell"><code>curl -XDELETE <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;account_token&gt;'</span>
 </code></pre>
 
 <blockquote>
@@ -224,8 +250,29 @@ The internal <code>hits</code> field in the response has a complicated structure
 </tr>
 </tbody></table>
 
+<h3 id="error-codes">Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Status Code</th>
+<th>Error</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>Empty URL parameter &lt;name&gt;</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>Parameters map is nil</td>
+</tr>
+</tbody></table>
+
 <h2 id="check-whether-an-item-exists-in-the-default-watchlist">Check Whether an Item Exists in the Default Watchlist</h2>
-<pre class="highlight shell"><code>curl <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list/has?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;acount_token&gt;'</span>
+<pre class="highlight shell"><code>curl <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list/has?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;account_token&gt;'</span>
 </code></pre>
 
 <blockquote>
@@ -272,8 +319,29 @@ The internal <code>hits</code> field in the response has a complicated structure
 </tr>
 </tbody></table>
 
+<h3 id="error-codes">Error Codes</h3>
+
+<table><thead>
+<tr>
+<th>Status Code</th>
+<th>Error</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>400</td>
+<td>Bad Request</td>
+<td>Empty URL parameter &lt;name&gt;</td>
+</tr>
+<tr>
+<td>500</td>
+<td>Internal Server Error</td>
+<td>Parameters map is nil</td>
+</tr>
+</tbody></table>
+
 <h2 id="clear-the-default-watchlist">Clear the default Watchlist</h2>
-<pre class="highlight shell"><code>curl -XDELETE <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list/all?account_token=&lt;acount_token&gt;'</span>
+<pre class="highlight shell"><code>curl -XDELETE <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list/all?account_token=&lt;account_token&gt;'</span>
 </code></pre>
 
 <blockquote>
@@ -313,6 +381,14 @@ The internal <code>hits</code> field in the response has a complicated structure
 <td>True</td>
 </tr>
 </tbody></table>
+
+<h3 id="error-codes">Error Codes</h3>
+
+<p>If an error occurs, a 500 status code is returned along with the following JSON body:</p>
+
+<pre>{
+  "success": false
+}</pre>
 
       </div>
       <div class="dark-box">
