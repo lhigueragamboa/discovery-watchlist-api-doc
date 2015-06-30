@@ -53,7 +53,7 @@
 </code></pre>
 
 <blockquote>
-<p>Be sure to replace <code>account_token</code> with the one provided by the Gigya authentication service, and replace api_version</code> with either v1 or v2.</p>
+<p>Be sure to replace <code>account_token</code> with you authentication token, and replace api_version</code> with either v1 or v2.</p>
 </blockquote>
 
 <p>To start using the Watchlist service, obtain the API key or authentication token from your Ooyala representative.</p>
@@ -105,7 +105,7 @@ The Watchlist API requires that the <code>account_token</code> URL parameter be 
 </thead><tbody>
 <tr>
 <td>account_token</td>
-<td>Authentication token provided by Gigya</td>
+<td>Authentication token</td>
 <td>String</td>
 <td>Yes</td>
 </tr>
@@ -116,10 +116,6 @@ The Watchlist API requires that the <code>account_token</code> URL parameter be 
 <td>Yes</td>
 </tr>
 </tbody></table>
-
-<aside class="success">
-All requests to the Watchlist API must be authenticated.
-</aside>
 
 <aside class="notice">
 The internal <code>hits</code> field in the response has a complicated structure that is excluded from the examples.
@@ -152,7 +148,7 @@ The internal <code>hits</code> field in the response has a complicated structure
 </tbody></table>
 
 <h2 id="add-an-item">Add an Item</h2>
-<pre class="highlight shell"><code>curl -XPOST -H <span class="s1">'Content-Type: application/json'</span> <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;account_token&gt;'</span> -d <span class="s1">'{}'</span>
+<pre class="highlight shell"><code>curl -XPOST -H <span class="s1">'Content-Type: application/json'</span> <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list?embed_code=9pMGJ4cDowP-bX8-aITZyNyuHH7dyeOk&amp;account_token=&lt;account_token&gt;'</span>
 </code></pre>
 
 <blockquote>
@@ -184,7 +180,7 @@ The internal <code>hits</code> field in the response has a complicated structure
 </thead><tbody>
 <tr>
 <td>account_token</td>
-<td>Authentication token provided by Gigya</td>
+<td>Authentication token</td>
 <td>String</td>
 <td>Yes</td>
 </tr>
@@ -232,7 +228,7 @@ The internal <code>hits</code> field in the response has a complicated structure
 </thead><tbody>
 <tr>
 <td>account_token</td>
-<td>Authentication token provided by Gigya</td>
+<td>Authentication token</td>
 <td>String</td>
 <td>Yes</td>
 </tr>
@@ -301,7 +297,7 @@ The internal <code>hits</code> field in the response has a complicated structure
 </thead><tbody>
 <tr>
 <td>account_token</td>
-<td>Authentication token provided by Gigya</td>
+<td>Authentication token</td>
 <td>String</td>
 <td>Yes</td>
 </tr>
@@ -340,7 +336,7 @@ The internal <code>hits</code> field in the response has a complicated structure
 </tr>
 </tbody></table>
 
-<h2 id="clear-the-default-watchlist">Clear the default Watchlist</h2>
+<h2 id="clear-the-default-watchlist">Clear the Default Watchlist</h2>
 <pre class="highlight shell"><code>curl -XDELETE <span class="s1">'http://player.ooyala.com/watchlist/&lt;api_version&gt;/list/all?account_token=&lt;account_token&gt;'</span>
 </code></pre>
 
@@ -370,7 +366,7 @@ The internal <code>hits</code> field in the response has a complicated structure
 </thead><tbody>
 <tr>
 <td>account_token</td>
-<td>Authentication token provided by Gigya</td>
+<td>Authentication token</td>
 <td>String</td>
 <td>True</td>
 </tr>
